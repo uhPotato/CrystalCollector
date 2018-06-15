@@ -1,20 +1,48 @@
 $(document).ready(function() {
 
+	// =============================
+	// Set up global variables first
+	// =============================
 
+	// initialize global variables
 	var gemOneValue, gemTwoValue, gemThreeValue, gemFourValue;
 	var wins = 0;
 	var losses = 0;
-	
+	// randomComputerNumber is the random digit computer will generage
 	var randomComputerNumber;
-
+	// userTallyScore is the ongoing sum of gem values user has picked
 	var userTallyScore;
 
-	
-	
+	// ================
+	// Set up functions
+	// ================
+
+	// function that initializes the variables for each now round of the game
+
+/*
+	function determineCrystalPosition(){
+		var crystalOne = crystalValues[0];
+		var crystalTwo = crystalValues[1];
+		var crystalThree = crystalValues[2];
+		var crystalFour = crystalValues[3];
+		console.log(crystalOne, crystalTwo, crystalThree, crystalFour)
+	}
+
+	function determineCrystalValues(){
+		while(crystalValues.length < 4) {
+			if(!crystalValues.includes(randomCrystal)){
+				crystalValues.push(randomCrystal);
+				console.log(crystalValues);
+				determineCrystalPosition();
+			}
+		}
+	}
+
+*/
 	function initializeVariables() {
 		// have computer pick a number between 19-120
 		randomComputerNumber = 19 + Math.floor(Math.random() * 102);
-		
+		// pick random gem values between 1-12
 		gemOneValue = 1 + Math.floor(Math.random() * 12);
 		gemTwoValue = 1 + Math.floor(Math.random() * 12);
 		gemThreeValue = 1 + Math.floor(Math.random() * 12);
@@ -29,7 +57,10 @@ $(document).ready(function() {
 		consoleLogVariables();
 	}
 
-	
+	// function to check if user has won or lost
+	// increment wins / losses in either case
+	// and then re-initialize variables for new round
+	// if user hasn't won or lost then nothing happens
 	function hasUserWonOrLost() {
 		// check if user has lost
 		if (userTallyScore > randomComputerNumber) {
@@ -55,15 +86,19 @@ $(document).ready(function() {
 
 	}
 
+	// =====================================
+	// Now comes the main game functionality
+	// =====================================
 
 	initializeVariables();
 
-	
+	// listen for clicks on any of the gems by targeting the gem class
 	$(".gem").on("click", function() {
-		
+		// each gem has a value attribute of gem1, gem2, gem3, or gem 4
+		// use this attribute to identify which gem the user actually clicked
 		var pressed = $(this).attr("value");
         console.log(pressed);
-        
+        // add the value of the gem to the user's ongoing score tally
         if (pressed == "gem1") {
         	userTallyScore += gemOneValue;
         } else if (pressed == "gem2") {
@@ -75,10 +110,10 @@ $(document).ready(function() {
         } else {
         	console.log("error");
         }
-        
+        // then update the html for the user score
         $("#userScore").html(userTallyScore);
         consoleLogVariables();
-        
+        // call the function to see if user has won or lost
         hasUserWonOrLost();
 	});
 
