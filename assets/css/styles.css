@@ -1,0 +1,24 @@
+body {
+	background: url("https://vignette.wikia.nocookie.net/steven-universe/images/6/64/Ocean_Gem_Background_2.jpg/revision/latest?cb=20160611051440");
+}
+
+.row {
+	margin-bottom: 10px;
+}
+
+.randomNumberDiv {
+	background-color: green;
+}
+
+.winsLossesDiv {
+	background-color: lightblue;
+}
+
+.scoreDiv {
+    background-color: purple;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}
